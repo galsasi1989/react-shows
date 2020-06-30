@@ -27,6 +27,7 @@ node('gce') {
     dir("./chart/react-shows") {
       sh """
          gcloud container clusters get-credentials k8s --zone us-west1-b
+         helm dependency update
          helm upgrade --install react-show --set image.tag=1.0.${BUILD_NUMBER} .
          """
     }
