@@ -7,7 +7,7 @@ spec:
   replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.selector.name }}
+      app: {{ template "app.name" . }}
   template:
     metadata:
 {{ include "app.labels" . | indent 6 }}

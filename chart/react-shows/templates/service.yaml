@@ -4,7 +4,7 @@ metadata:
   name: {{ template "app.name" . }}
 spec:
   selector:
-    app: {{ .Values.selector.name }}
+    app: {{ template "app.name" . }}
   ports:
     - port: {{ .Values.service.externalPort }}
       targetPort: {{ .Values.service.internalPort }}
