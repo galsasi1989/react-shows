@@ -1,6 +1,7 @@
 FROM node:13.8.0-alpine
 
 ENV USERNAME reactUser
+ENV NODE_ENV production
 RUN adduser -D -s /bin/sh -h /home/${USERNAME} ${USERNAME}
 
 WORKDIR /home/${USERNAME}
