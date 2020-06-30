@@ -3,7 +3,7 @@ node('gce') {
   cleanWs()
   git url: 'https://github.com/galsasi1989/react-shows.git'
 
-  docker.image("us.gcr.io/custom-resource-281709/jenkins-slaves/jenkins-node:13.8.3").inside {
+  docker.image("us.gcr.io/custom-resource-281709/jenkins-slaves/jenkins-node:13.8").inside {
     stage('build') {
       sh """
          yarn install
