@@ -27,9 +27,19 @@ node('gce') {
     dir("./chart/react-shows") {
       sh """
          gcloud container clusters get-credentials k8s --zone us-west1-b
+         helm lint
          helm dependency update
-         helm upgrade --install react-show --set image.tag=1.0.${BUILD_NUMBER} .
          """
+      try {
+        sh "helm upgrade --install react-show --set image.tag=1.0.${BUILD_NUMBER} ."
+      }
+      catch(Exception error) {
+        sh "#!/bin/sh -e\n echo 'Deployment Failed! Doing rollback, the error message: ${error}'"
+        releaseRevisions = sh(returnStdout: true, script: "helm history ${serviceName} --max 5 | grep deployed | awk '{print \$1}'").split()
+        lastSuccessfullRev = releaseRevisions[releaseRevisions.size() - 1]
+        sh "helm rollback ${serviceName} ${lastSuccessfullRev}"
+        currentBuild.result = 'FAILURE'
+      }
     }
   }
 }
