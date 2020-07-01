@@ -1,4 +1,4 @@
-apiVersion: 
+apiVersion: v2
 name: react-shows
 version: 1.0
 dependencies:
