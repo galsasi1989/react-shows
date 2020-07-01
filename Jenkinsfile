@@ -31,7 +31,7 @@ node('gce') {
          helm dependency update
          """
       try {
-        sh "helm upgrade --install react-show --set image.tag=1.0.${BUILD_NUMBER} ."
+        sh "helm upgrade --install ${serviceName} --set image.tag=1.0.${BUILD_NUMBER} ."
       }
       catch(Exception error) {
         sh "#!/bin/sh -e\n echo 'Deployment Failed! Doing rollback, the error message: ${error}'"

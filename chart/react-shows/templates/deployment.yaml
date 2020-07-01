@@ -23,9 +23,9 @@ spec:
         - name: PORT
           value: {{ .Values.service.internalPort | quote }}
         - name: MONGO_HOST
-          value: ""
+          value: '{{ template "app.name" . }}-mongodb'
         - name: MONGO_PORT
-          value: ""
+          value: {{ .Values.mongodb.port | quote }}
         resources:
           requests:
             memory: {{ .Values.resources.requests.memory  | quote }}

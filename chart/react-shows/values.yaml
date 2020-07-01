@@ -16,3 +16,6 @@ resources:
   limits:
     memory: 256Mi
     cpu: 500m
+
+mongodb:
+  port: 27017
